@@ -23,6 +23,8 @@
 <style>
 	.page-container {
 		position: relative;
+		display: flex;
+		flex-direction: column;
 		min-height: 100vh;
 	}
 
@@ -31,19 +33,18 @@
 		justify-content: center;
 		align-items: center;
 		padding: 0.5rem;
-		background: #f0f0f0;
+		margin-bottom: 0.5rem;
 	}
 
 	.nav-header {
-		color: black;
 		font-size: 1.5rem;
 		text-decoration: none;
-		font-family: 'Gugi';
+		font-family: monospace;
 	}
 
 	main {
-		flex: 1;
 		padding-bottom: 4rem;
+		flex: 1;
 	}
 
 	footer {
@@ -52,8 +53,8 @@
 		width: 100%;
 		height: 4rem;
 		padding: 0.5rem 5rem;
-		background: #f0f0f0;
-		font-family: 'Inter';
+		background: #ebebeb;
+		font-family: monospace;
 
 		display: flex;
 		justify-content: space-between;
@@ -67,5 +68,11 @@
 
 	footer b {
 		color: transparent;
+	}
+
+	@media (max-width: 768px) {
+		footer b {
+			display: none;
+		}
 	}
 </style>
