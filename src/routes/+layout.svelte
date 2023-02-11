@@ -36,6 +36,11 @@
 		margin-bottom: 0.5rem;
 	}
 
+	nav a {
+		color: black;
+		text-decoration: none;
+	}
+
 	.nav-header {
 		font-size: 1.5rem;
 		text-decoration: none;
