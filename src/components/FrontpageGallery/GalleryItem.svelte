@@ -82,7 +82,6 @@
 		opacity: 0.95;
 		transform: scale(1.01);
 		box-shadow: 0 0 10px 0 rgba(22, 22, 22, 0.5);
-		border: 1px solid rgba(255, 255, 255, 0.8);
 	}
 
 	.context {
@@ -128,6 +127,8 @@
 		flex-direction: row;
 		align-items: center;
 		justify-content: space-around;
+
+		transition: all 0.12s ease-in;
 	}
 
 	.play button:hover {

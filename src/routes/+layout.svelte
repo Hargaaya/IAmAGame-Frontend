@@ -1,10 +1,10 @@
 <svelte:head>
-	<title>Layout header</title>
+	<title>I am a game</title>
 </svelte:head>
 
 <div class="page-container">
 	<nav>
-		<a href="/" class="nav-header"> I am a game</a>
+		<a href="/" class="nav-header">I am a game</a>
 	</nav>
 
 	<main>
