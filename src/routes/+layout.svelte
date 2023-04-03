@@ -1,5 +1,5 @@
 <svelte:head>
-	<title>Layout header</title>
+	<title>I am a game</title>
 </svelte:head>
 
 <div class="page-container">

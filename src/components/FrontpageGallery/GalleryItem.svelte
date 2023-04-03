@@ -22,18 +22,17 @@
 				<h3 class="grid-title">{title}</h3>
 				<p class="grid-description">{description}</p>
 			</span>
-			<a href={link} target="_blank" rel="noreferrer" class="play">
+			<a href={link} class="play">
 				<button>
 					Play {title}
-					<Play color="black" size="24" /></button
-				>
+					<Play color="black" size="24" />
+				</button>
 			</a>
 		</div>
 	</div>
 {:else}
-	<div
-		on:click={extend}
-		on:keydown={extend}
+	<a
+		href={link}
 		on:mouseover={() => (hover = true)}
 		on:focus={() => (hover = true)}
 		on:mouseout={() => (hover = false)}
@@ -42,7 +41,7 @@
 		style={`background-image: url(${image});`}
 	>
 		<Play active={hover} />
-	</div>
+	</a>
 {/if}
 
 <style>
