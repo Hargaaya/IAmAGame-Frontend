@@ -1,3 +1,5 @@
-<div>
-	<h1>Gif Party</h1>
-</div>
+<script lang="ts">
+	import GameSelection from '../../../components/GameSelection.svelte';
+</script>
+
+<GameSelection gameType="gif-party" />
