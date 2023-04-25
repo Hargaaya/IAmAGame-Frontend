@@ -5,6 +5,7 @@
 	import { PUBLIC_BACKEND_URL } from '$env/static/public';
 	import type { GameRoom, Player } from '../../../../types/global';
 
+	let roomKey = $page.params.roomKey;
 	let loading = true;
 	let error = false;
 	let connection = new HubConnectionBuilder().withUrl(`${PUBLIC_BACKEND_URL}/hub/gifparty`).build();
@@ -20,8 +21,8 @@
 				// get query param for player id
 				const url = new URL(window.location.href);
 				const playerId = url.searchParams.get('playerId');
-				if(playerId) {
-					connection.send('GetPlayer', $page.params.roomKey, playerId);
+				if (playerId) {
+					connection.send('GetPlayer', roomKey, playerId);
 				}
 			})
 			.catch(() => {
@@ -30,20 +31,20 @@
 			});
 	});
 
-	const addPlayer = () => connection.send('AddPlayer', $page.params.roomKey, playerName);
+	const addPlayer = () => connection.send('AddPlayer', roomKey, playerName);
 	const changePlayerReady = () => {
-		if(!player) return;
-		connection.send('SetPlayerReadyState', $page.params.roomKey, player, player.isReady);
+		if (!player) return;
+		connection.send('SetPlayerReadyState', roomKey, player, player.isReady);
 	};
 	const leave = () => {
-		if(!player) return;
-		connection.send('RemovePlayer', $page.params.roomKey, player);
+		if (!player) return;
+		connection.send('RemovePlayer', roomKey, player);
 		window.location.href = `/gif-party/play`;
 	};
 	connection.on('ReceivePlayer', (p) => {
 		console.log('recievedPlayer: ', p);
 		player = p;
-		
+
 		// add query param to url with player id
 		const url = new URL(window.location.href);
 		url.searchParams.set('playerId', p.id);
@@ -60,28 +61,26 @@
 {:else}
 	<div class="container">
 		{#if player}
-		<div class="textContainer">
-			<h1>Game code is: {$page.params.roomKey}</h1>
-			<br />
-			<h2>Your in, {player.name}!</h2>
-			<h2>See your name on the screen?</h2>
+			<div class="textContainer">
+				<h1>Game code is: {roomKey}</h1>
+				<br />
+				<h2>Your in, {player.name}!</h2>
+				<h2>See your name on the screen?</h2>
 
-			<div style={
-				player.isReady ? 'color: green;' : 'color: rgb(255, 132, 0);'
-			}>
-				<label for="isReady">Ready?</label>
-				<input type="checkbox" bind:checked={player.isReady} on:change={changePlayerReady} />
+				<div style={player.isReady ? 'color: green;' : 'color: rgb(255, 132, 0);'}>
+					<label for="isReady">Ready?</label>
+					<input type="checkbox" bind:checked={player.isReady} on:change={changePlayerReady} />
+				</div>
+
+				<br />
+
+				<button type="button" on:click={leave}>Leave</button>
 			</div>
-
-			<br />
-
-			<button type="button" on:click={leave}>Leave</button>
-		</div>
 		{:else}
-		<div>
-			<input type="text" bind:value={playerName} />
-			<button on:click={addPlayer} disabled={loading}>Add Me!</button>
-		</div>
+			<div>
+				<input type="text" bind:value={playerName} />
+				<button on:click={addPlayer} disabled={loading}>Add Me!</button>
+			</div>
 		{/if}
 	</div>
 {/if}
