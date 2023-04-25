@@ -14,7 +14,7 @@
 html,
 body {
 	height: 100%;
-	font-family: 'Gugi', sans-serif;
+	font-family: monospace;
 }
 body {
 	line-height: 1.5;
@@ -46,14 +46,6 @@ h6 {
 #root,
 #__next {
 	isolation: isolate;
-}
-
-@font-face {
-	font-family: 'Gugi';
-	font-style: normal;
-	font-weight: 500;
-	src: url('Gugi.ttf'); /* IE9 Compat Modes */
-	src: local(''), url('Gugi.ttf') format('truetype'); /* Modern Browsers */
 }
 
 .svg-icon {

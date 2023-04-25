@@ -1,7 +1,7 @@
 <script lang="ts">
 	import GroupIcon from '../assets/GroupIcon.svelte';
 	import PlusIcon from '../assets/PlusIcon.svelte';
-	import { BACKEND_URL } from '$env/static/private';
+	import { PUBLIC_BACKEND_URL } from '$env/static/public';
 
 	export let gameType: string;
 
@@ -10,7 +10,7 @@
 
 	const createRoom = async () => {
 		loading = true;
-		const res = await fetch(`${BACKEND_URL}/room/${gameType}`, {
+		const res = await fetch(`${PUBLIC_BACKEND_URL}/room/${gameType}`, {
 			method: 'POST'
 		});
 
@@ -21,11 +21,11 @@
 		}
 
 		const roomId = await res.text();
-		window.open(`${gameType}/${roomId}`, '_self');
+		window.open(`${gameType}/room/${roomId}`, '_self');
 	};
 
 	const joinRoom = () => {
-		console.log('join room', gameType);
+		window.open(`${gameType}/play`, '_self');
 	};
 </script>
 
