@@ -1,4 +1,4 @@
-interface TenorGif {
+export interface TenorGif {
 	id: string;
 	title: string;
 	media_formats: {
@@ -26,7 +26,7 @@ interface TenorGif {
 	hasAudio: boolean;
 }
 
-interface MediaFormat {
+export interface MediaFormat {
 	url: string;
 	duration: number;
 	preview: string;
