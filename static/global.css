@@ -53,7 +53,9 @@ h6 {
 	height: 1.5rem;
 }
 
-input {
+input:not([type='checkbox']),
+select,
+textarea {
 	width: 100%;
 	max-width: 300px;
 	padding: 10px;
