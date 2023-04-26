@@ -30,32 +30,17 @@
   $: searchTerm !== "" && search();
 </script>
 
-<form class="search-bar" on:submit={search}>
-  <input
-    type="text"
-    placeholder="Search for a gif"
-    bind:value={searchTerm}
-    on:keyup={(e) => {
-      if(e.currentTarget.value === "") {
-        setAutoComplete("");
-        getFeaturedGifs();
-      } else {
-        setAutoComplete(e.currentTarget.value);
-        search();
-      }
-    }}
-  />
-  <button type="submit" class="searchButton" on:click={search} on:submit={search} >Search</button>
-</form>
-
-<style lang="scss">
-  .search-bar { 
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-
-    button {
-      margin: 0;
+<input
+  type="text"
+  placeholder="Search for a gif"
+  bind:value={searchTerm}
+  on:keyup={(e) => {
+    if(e.currentTarget.value === "") {
+      setAutoComplete("");
+      getFeaturedGifs();
+    } else {
+      setAutoComplete(e.currentTarget.value);
+      search();
     }
-  }
-</style>
+  }}
+/>

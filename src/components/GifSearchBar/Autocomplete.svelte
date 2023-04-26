@@ -18,7 +18,10 @@
 {#if autoCompleteText !== ""}
   <div class="autoCompleteContainer">
     {#each autoCompletions as completion}
-      <button style={`background-color: ${randomColor()}`} class="autoCompleteItem" on:click={() => setSearchTerm(completion)}>
+      <button style={`background-color: ${randomColor()}`} class="autoCompleteItem" on:click={() => {
+        setSearchTerm(completion)
+        autoCompleteText = completion;
+      }}>
         {completion}
       </button>
     {/each}
