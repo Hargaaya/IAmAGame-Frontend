@@ -56,17 +56,27 @@
 	<div>loading...</div>
 {:else}
   <div class="container">
-    <h1>Game code is: {$page.params.roomKey}</h1>
-    <h2>Go to <u>{linkForUsers}</u> if you want to play!</h2>
-    {#if game && game.players.length > 0}
-      <div>
-        <h2>Players</h2>
-        <ul>
-          {#each game.players as player}
-            <li class={"player" + (player.isReady ? " ready" : "")}>{player.isReady ? "Ready!" : ""} {player.name}</li>
-          {/each}
-        </ul>
+    <div class="header">
+      <div class="code">
+        <h2>Game code:</h2>
+        <h1>{$page.params.roomKey}</h1>
       </div>
+      <h2>Go to <u>{linkForUsers}</u> if you want to play!</h2>
+    </div>
+
+    {#if game}
+      {#if game.players.length > 0}
+        <div>
+          <h2>Players</h2>
+          <ul>
+            {#each game.players as player}
+              <li class={"player" + (player.isReady ? " ready" : "")}>{player.isReady ? "Ready!" : ""} {player.name}</li>
+            {/each}
+          </ul>
+        </div>
+      {:else}
+        <h3>No players yet...</h3>
+      {/if}
     {/if}
   </div>
 {/if}
@@ -90,6 +100,8 @@
     align-items: center;
     justify-content: center;
     text-align: center;
+    flex: 1;
+    gap: 4em;
 
     ul {
       list-style: none;

@@ -49,23 +49,6 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
-    input {
-      width: 100%;
-      max-width: 300px;
-      padding: 10px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-      margin: 0.5em 1em;
-    }
-
-    button {
-      padding: 0.5em 1em;
-      margin: 0 1em 1em 0.5em;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-      background: #fff;
-      cursor: pointer;
-    }
+    flex: 1;
   }
 </style>

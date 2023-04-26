@@ -103,13 +103,13 @@
 
 				<div class="gifPartyContainer">
 					<h1>Gif Party</h1>
-					<SearchBar visible={!selectedGif} searchTerm={searchTerm} setAutoComplete={setAutoComplete} setSearchTerm={setSearchTerm} setGifs={setGifs} />
+					<SearchBar searchTerm={searchTerm} setAutoComplete={setAutoComplete} setSearchTerm={setSearchTerm} setGifs={setGifs} />
 					<Autocomplete autoCompleteText={autoCompleteText} setSearchTerm={setSearchTerm} />
 					<GifList selectedGif={selectedGif} setSelectedGif={setSelectedGif} gifs={gifs} />
 				</div>
 			</div>
 		{:else}
-			<div>
+			<div class="addContainer">
 				<input type="text" bind:value={playerName} />
 				<button on:click={addPlayer} disabled={loading}>Add Me!</button>
 			</div>
@@ -140,4 +140,12 @@
 		justify-content: center;
 		flex: 1;
 	}
+
+	.addContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+  }
 </style>
