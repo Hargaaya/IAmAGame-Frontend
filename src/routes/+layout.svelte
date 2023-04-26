@@ -1,5 +1,5 @@
 <svelte:head>
-	<title>Layout header</title>
+	<title>I am a game</title>
 </svelte:head>
 
 <div class="page-container">
@@ -50,6 +50,8 @@
 	main {
 		padding-bottom: 4rem;
 		flex: 1;
+		display: flex;
+		flex-direction: column;
 	}
 
 	footer {

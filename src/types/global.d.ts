@@ -2,20 +2,20 @@ export interface TenorGif {
 	id: string;
 	title: string;
 	media_formats: {
-		nanomp4: media_format;
-		tinywebm: media_format;
-		tinygifpreview: media_format;
-		nanowebm: media_format;
-		gif: media_format;
-		nanogifpreview: media_format;
-		tinygif: media_format;
-		gifpreview: media_format;
-		mediumgif: media_format;
-		nanogif: media_format;
-		mp4: media_format;
-		loopedmp4: media_format;
-		tinymp4: media_format;
-		webm: media_format;
+		nanomp4: MediaFormat;
+		tinywebm: MediaFormat;
+		tinygifpreview: MediaFormat;
+		nanowebm: MediaFormat;
+		gif: MediaFormat;
+		nanogifpreview: MediaFormat;
+		tinygif: MediaFormat;
+		gifpreview: MediaFormat;
+		mediumgif: MediaFormat;
+		nanogif: MediaFormat;
+		mp4: MediaFormat;
+		loopedmp4: MediaFormat;
+		tinymp4: MediaFormat;
+		webm: MediaFormat;
 	};
 	created: number;
 	content_description: string;
@@ -26,7 +26,7 @@ export interface TenorGif {
 	hasAudio: boolean;
 }
 
-export interface Media_format {
+export interface MediaFormat {
 	url: string;
 	duration: number;
 	preview: string;
