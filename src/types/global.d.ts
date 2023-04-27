@@ -33,3 +33,28 @@ export interface MediaFormat {
 	dims: number[];
 	size: number;
 }
+
+export interface Player {
+	id: string;
+	name: string;
+	isReady: boolean;
+	score: number;
+}
+
+export interface Game {
+	gameState: 'ChoosingPhrase' | 'Submissions' | 'Voting' | 'Ended';
+	current: boolean;
+	phrase?: string;
+	startedAt?: number;
+	submissions?: Submission[];
+}
+
+export interface GameRoom {
+	name: string;
+	gameState: 'Lobby' | 'Running' | 'Ended';
+	players: Player[];
+	maxPlayers: number;
+	startedAt: number;
+	games: Game[];
+	host?: Player;
+}

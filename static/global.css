@@ -1,0 +1,82 @@
+/*
+  		Josh's Custom CSS Reset
+  		https://www.joshwcomeau.com/css/custom-css-reset/
+	*/
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+* {
+	margin: 0;
+}
+html,
+body {
+	height: 100%;
+	font-family: monospace;
+}
+body {
+	line-height: 1.5;
+	-webkit-font-smoothing: antialiased;
+}
+img,
+picture,
+video,
+canvas,
+svg {
+	display: block;
+	max-width: 100%;
+}
+input,
+button,
+textarea,
+select {
+	font: inherit;
+}
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	overflow-wrap: break-word;
+}
+#root,
+#__next {
+	isolation: isolate;
+}
+
+.svg-icon {
+	width: 1.5rem;
+	height: 1.5rem;
+}
+
+input:not([type='checkbox']),
+select,
+textarea {
+	width: 100%;
+	max-width: 300px;
+	padding: 10px;
+	border-radius: 5px;
+	border: 1px solid #ccc;
+	margin: 0.5em 1em;
+}
+
+button {
+	padding: 0.5em 1em;
+	margin: 0 1em 1em 0.5em;
+	border-radius: 5px;
+	border: 1px solid #ccc;
+	background: #fff;
+	cursor: pointer;
+
+	transition: all 0.2s ease-in-out;
+}
+
+button:hover,
+button:focus {
+	background: #fbfbfb;
+	box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.35);
+}

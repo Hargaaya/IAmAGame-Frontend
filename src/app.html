@@ -2,6 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
+		<link rel="stylesheet" href="%sveltekit.assets%/global.css" />
 		<link rel="icon" href="%sveltekit.assets%/favicon.png" />
 		<meta name="viewport" content="width=device-width" />
 		%sveltekit.head%
@@ -10,62 +11,3 @@
 		<div style="display: contents">%sveltekit.body%</div>
 	</body>
 </html>
-
-<style>
-	/*
-  		Josh's Custom CSS Reset
-  		https://www.joshwcomeau.com/css/custom-css-reset/
-	*/
-
-	*,
-	*::before,
-	*::after {
-		box-sizing: border-box;
-	}
-	* {
-		margin: 0;
-	}
-	html,
-	body {
-		height: 100%;
-	}
-	body {
-		line-height: 1.5;
-		-webkit-font-smoothing: antialiased;
-	}
-	img,
-	picture,
-	video,
-	canvas,
-	svg {
-		display: block;
-		max-width: 100%;
-	}
-	input,
-	button,
-	textarea,
-	select {
-		font: inherit;
-	}
-	p,
-	h1,
-	h2,
-	h3,
-	h4,
-	h5,
-	h6 {
-		overflow-wrap: break-word;
-	}
-	#root,
-	#__next {
-		isolation: isolate;
-	}
-
-	@font-face {
-		font-family: 'Gugi';
-		font-style: normal;
-		font-weight: 500;
-		src: url('Gugi.ttf'); /* IE9 Compat Modes */
-		src: local(''), url('Gugi.ttf') format('truetype'); /* Modern Browsers */
-	}
-</style>
