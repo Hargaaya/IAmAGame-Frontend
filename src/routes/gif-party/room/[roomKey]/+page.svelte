@@ -58,10 +58,7 @@
 {:else}
   <div class="container">
     <div class="header">
-      <div class="code">
-        <h2>Game code:</h2>
-        <h1>{$page.params.roomKey}</h1>
-      </div>
+      <h2>Game code is: {$page.params.roomKey}</h2>
       <QrCode url={linkForUsers} />
     </div>
 
