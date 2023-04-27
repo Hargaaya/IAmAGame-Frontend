@@ -31,6 +31,7 @@
 	"type": "module",
 	"dependencies": {
 		"@microsoft/signalr": "^7.0.4",
+		"easyqrcodejs": "^4.4.13",
 		"sass": "^1.62.0"
 	}
 }

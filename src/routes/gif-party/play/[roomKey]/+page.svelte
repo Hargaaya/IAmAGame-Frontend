@@ -92,7 +92,7 @@
 				<h2>Your in, {player.name}!</h2>
 				<h2>See your name on the screen?</h2>
 
-				<div style={player.isReady ? 'color: green;' : 'color: rgb(255, 132, 0);'}>
+				<div class="readyContainer" style={player.isReady ? 'color: green;' : 'color: rgb(255, 132, 0);'}>
 					<label for="isReady">Ready?</label>
 					<input type="checkbox" bind:checked={player.isReady} on:change={changePlayerReady} />
 				</div>
@@ -130,6 +130,20 @@
 			flex-direction: column;
 			align-items: center;
 			justify-content: center;
+
+			.readyContainer {
+				font-size: x-large;
+				
+				display: flex;
+				flex-direction: row;
+				align-items: center;
+				gap: 0.5em;
+
+				input[type='checkbox'] {
+					width: 1em;
+					height: 1em;
+				}
+			}
 		}
 	}
 

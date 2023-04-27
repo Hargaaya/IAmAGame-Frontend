@@ -4,6 +4,7 @@
 	import { page } from '$app/stores';
 	import { PUBLIC_BACKEND_URL } from '$env/static/public';
 	import type { GameRoom, Player } from '../../../../types/global';
+	import QrCode from '../../../../components/QRCode.svelte';
 
   let loading = true;
 	let error = false;
@@ -61,7 +62,7 @@
         <h2>Game code:</h2>
         <h1>{$page.params.roomKey}</h1>
       </div>
-      <h2>Go to <u>{linkForUsers}</u> if you want to play!</h2>
+      <QrCode url={linkForUsers} />
     </div>
 
     {#if game}
@@ -107,6 +108,10 @@
       list-style: none;
       padding: 0;
       margin: 0;
+
+      li {
+        font-size: x-large;
+      }
     }
   }
 

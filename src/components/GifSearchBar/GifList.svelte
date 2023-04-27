@@ -10,7 +10,7 @@
   {#each gifs as gif}
     <button type="button" on:click={() => {
       selectedGif ? selectedGif = undefined : setSelectedGif(gif);
-    }} class="gifSelectBtn">
+    }} class={"gifSelectBtn " + (selectedGif ? "selected" : "")}>
       <img src={gif.media_formats.tinygif.url} alt={gif.title} />
     </button>
   {/each}
@@ -40,12 +40,6 @@
         width: 200px;
         border: none;
         transition: border-radius 0.2s ease-in-out;
-
-        &:hover,
-        &:focus {
-          outline: none;
-          border-radius: 10px;
-        }
       }
 
       &:hover,
@@ -54,6 +48,11 @@
         border-radius: 10px;
         box-shadow: 0 0 0 2px hsl(0deg 0% 0%), 0 0 0 4px #007fe0, 4px 4px 8px hsl(0, 0%, 65%); 
         outline: none;
+
+        img {
+          border-radius: 10px;
+          outline: none;
+        }
       }
     }
   }
