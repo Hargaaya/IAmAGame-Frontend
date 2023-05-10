@@ -39,19 +39,40 @@ export interface Player {
 	name: string;
 	isReady: boolean;
 	score: number;
+	hasVoted: boolean;
+}
+
+enum GameState {
+	ChoosingPhrase,
+	Submissions,
+	Voting,
+	Ended,
 }
 
 export interface Game {
-	gameState: 'ChoosingPhrase' | 'Submissions' | 'Voting' | 'Ended';
+	gameState: GameState;
 	current: boolean;
 	phrase?: string;
 	startedAt?: number;
 	submissions?: Submission[];
 }
 
+export interface Submission {
+	playerId: string;
+	gifUrl?: string;
+	submittedAt: number;
+	votes: number;
+}
+
+enum GameRoomState {
+	Lobby,
+	Running,
+	Ended,
+}
+
 export interface GameRoom {
 	name: string;
-	gameState: 'Lobby' | 'Running' | 'Ended';
+	gameState: GameRoomState;
 	players: Player[];
 	maxPlayers: number;
 	startedAt: number;

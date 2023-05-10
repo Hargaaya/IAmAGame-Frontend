@@ -1,7 +1,6 @@
 <script lang="ts">
   import QRCode from 'easyqrcodejs'
 	import { onMount } from 'svelte';
-  // import * as QRCode from 'easyqrcodejs';
 
   export let url: string;
   let node: HTMLElement;

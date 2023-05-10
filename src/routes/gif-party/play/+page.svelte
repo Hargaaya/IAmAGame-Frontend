@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { page } from "$app/stores";
 	import { PUBLIC_BACKEND_URL } from "$env/static/public";
-	import { HubConnectionBuilder } from "@microsoft/signalr";
+	import { HttpTransportType, HubConnectionBuilder, LogLevel } from "@microsoft/signalr";
 	import { onMount } from "svelte";
 
   let roomKey = $page.params.roomKey || "";
-  let connection = new HubConnectionBuilder().withUrl(`${PUBLIC_BACKEND_URL}/hub/gifparty`).build();
+  let connection = new HubConnectionBuilder().configureLogging(LogLevel.Debug).withUrl(`${PUBLIC_BACKEND_URL}/hub/gifparty`).withAutomaticReconnect([2000]).build();
 
   onMount(() => {
 		connection
@@ -29,6 +29,7 @@
       })
       .catch(() => {
         console.error("Failed to connect to hub");
+        alert("Failed to connect to hub 😭, please try again later.");
       });
   });
 
