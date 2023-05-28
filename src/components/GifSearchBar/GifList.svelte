@@ -9,8 +9,8 @@
 <div class="giflist">
   {#each gifs as gif}
     <button type="button" on:click={() => {
-      selectedGif ? selectedGif = undefined : setSelectedGif(gif);
-    }} class={"gifSelectBtn " + (selectedGif ? "selected" : "")}>
+      selectedGif ? setSelectedGif(undefined) : setSelectedGif(gif);
+    }} class={"gifSelectBtn " + (selectedGif && selectedGif.id === gif.id ? "selected" : "")}>
       <img src={gif.media_formats.tinygif.url} alt={gif.title} />
     </button>
   {/each}
@@ -43,16 +43,21 @@
       }
 
       &:hover,
-      &:focus {
+      &.selected {
         transform: scale(1.05);
         border-radius: 10px;
-        box-shadow: 0 0 0 2px hsl(0deg 0% 0%), 0 0 0 4px #007fe0, 4px 4px 8px hsl(0, 0%, 65%); 
+        box-shadow: 0 0 0 2px hsl(0deg 0% 0%);
         outline: none;
 
         img {
           border-radius: 10px;
           outline: none;
         }
+      }
+
+      &.selected {
+        transform: scale(1.1);
+        box-shadow: 0 0 0 2px hsl(0deg 0% 0%), 0 0 0 4px #007fe0, 4px 4px 8px hsl(0, 0%, 65%); 
       }
     }
   }
