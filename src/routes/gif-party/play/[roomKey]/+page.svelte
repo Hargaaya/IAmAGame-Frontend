@@ -10,6 +10,8 @@
 	import Autocomplete from "../../../../components/GifSearchBar/Autocomplete.svelte";
 	import sortPlayersByPoints from "../../../../helpers/SortPlayersByScore";
 	import GetWinningPlayer from "../../../../helpers/GetWinningPlayer";
+	import WinnerCup from "../../../../assets/WinnerCup.svelte";
+	import { confetti } from '@neoconfetti/svelte';
 
 	let roomKey = $page.params.roomKey;
 	let loading = true;
@@ -23,6 +25,7 @@
 	let searchTerm = "";
 	let autoCompleteText = "";
 	let selectedGif = undefined as TenorGif | undefined;
+	let sentGif = undefined as TenorGif | undefined;
 
 	function setGifs (newGifs: TenorGif[]) {
 		gifs = newGifs;
@@ -40,9 +43,14 @@
 		selectedGif = newSelectedGif;
 	}
 
+	function setSentGif (newSentGif: TenorGif | undefined) {
+		sentGif = newSentGif;
+	}
+
 	function sendSelectedGif () {
 		if (!selectedGif) return;
 		connection.send('AddSubmission', roomKey, player, selectedGif.media_formats.gif.url);
+		setSentGif(selectedGif);
 	}
 
 	onMount(() => {
@@ -95,6 +103,13 @@
 		alert('The game has already started!');
 		window.location.href = `/gif-party/play`;
 	}
+
+	$: if(currentGame && currentGame.gameState === 2) {
+		setAutoComplete('');
+		setSearchTerm('');
+		setSelectedGif(undefined);
+		setSentGif(undefined);
+	}
 </script>
 
 <h1 style="text-align: center;">Gif Party</h1>
@@ -105,7 +120,9 @@
 	{:else if game && game.gameState === 1} <!-- Game is Running -->
 
 		{#if currentGame && currentGame.gameState === 0} <!-- Choosing / inputting phrase -->
-			<h2>Game started! Inputting a phrase on the big screen..</h2>
+			<h2 style="text-align: center">Game started!</h2>
+			<br />
+			<h2 style="text-align: center">Inputting a phrase on the big screen..</h2>
 		{:else if currentGame && currentGame.gameState === 1} <!-- Taking submissions -->
 			<h2>The phrase is: {currentGame.phrase}</h2>
 
@@ -114,8 +131,17 @@
 				<Autocomplete autoCompleteText={autoCompleteText} setSearchTerm={setSearchTerm} />
 				<GifList selectedGif={selectedGif} setSelectedGif={setSelectedGif} gifs={gifs} />
 
-				{#if selectedGif}
-					<button class="gifSubmit" type="button" on:click={sendSelectedGif}>Submit GIF</button>
+				{#if selectedGif || sentGif}
+				<div class="gifSubmitContainer">
+					{#if sentGif}
+						<div class="gifSubmitPreview">
+							<img src={sentGif?.media_formats.gif.url} alt="gif" style="aspect-ratio: 1/1; height: 75px;" />
+						</div>
+					{/if}
+					<button class="gifSubmit" type="button" on:click={sendSelectedGif}>
+						{sentGif ? 'Change to selected gif' : 'Submit selected gif'}
+					</button>
+				</div>
 				{/if}
 			</div>
 
@@ -125,13 +151,13 @@
 
 				{#if currentGame && currentGame.submissions}
 					{#each currentGame.submissions as submission}
-						<button on:click={() => connection.send('Vote', roomKey, player, submission.playerId)}>
-							<img src={submission.gifUrl} alt="gif" style="aspect-ratio: 16/9; height: 200px;" />
+						<button style="padding: 0; border-radius: 10px" on:click={() => connection.send('Vote', roomKey, player, submission.playerId)}>
+							<img src={submission.gifUrl} alt="gif" style="aspect-ratio: 16/9; height: 200px; border-radius: 10px" />
 						</button>
 					{/each}
 				{/if}
 			{:else}
-        <h2>Waiting for other players to vote..</h2>
+        <h2 style="text-align: center;">Waiting for other players to vote..</h2>
       {/if}
 
 		{:else if currentGame && currentGame.gameState === 3} <!-- Game ended -->
@@ -140,12 +166,20 @@
 			<br />
 
       {#each sortPlayersByPoints(game.players) as p, i}
-        <h3 style={i === 0 ? "color: green; font-size: x-large" : ""}>{p.name === player?.name ? "You have" : p.name + " has"} {p.score} point{p.score !== 1 ? "s" : ""}</h3>
+				{#if i === 0}
+          <div style="display: flex; flex-direction: row; align-items: center; gap: 0.4em">
+            <WinnerCup size="2em" color="#e9d636" />
+            <h3 style="color: #e9d636; font-size: x-large;">{p.name === player?.name ? "You have" : p.name + " has"} {p.score} point{p.score !== 1 ? "s" : ""}</h3>
+          </div>
+        {:else}
+          <h3>{p.name === player?.name ? "You have" : p.name + " has"} {p.score} point{p.score !== 1 ? "s" : ""}</h3>
+        {/if}
       {/each}
 
 		{/if}
 
 	{:else if game && game.gameState === 2} <!-- Game ended -->
+		<div use:confetti={{ particleCount: 200, force: 0.3, stageWidth: document.body.clientWidth, stageHeight: document.body.clientHeight / 2 }}></div>
 		<h2>Game ended!</h2>
 
 		<h1>{GetWinningPlayer(game.players).name === player?.name ? "You" : GetWinningPlayer(game.players).name} won!</h1>
@@ -153,7 +187,14 @@
 		<br />
 
     {#each sortPlayersByPoints(game.players) as p, i}
-			<h3 style={i === 0 ? "color: green; font-size: x-large" : ""}>{p.name === player?.name ? "You" : p.name} got {p.score} point{p.score !== 1 ? "s" : ""}</h3>
+			{#if i === 0}
+				<div style="display: flex; flex-direction: row; align-items: center; gap: 0.4em">
+					<WinnerCup size="2em" color="#e9d636" />
+					<h3 style="color: #e9d636; font-size: x-large;">{p.name === player?.name ? "You have" : p.name + " has"} {p.score} point{p.score !== 1 ? "s" : ""}</h3>
+				</div>
+			{:else}
+				<h3>{p.name === player?.name ? "You have" : p.name + " has"} {p.score} point{p.score !== 1 ? "s" : ""}</h3>
+			{/if}
     {/each}
 	{/if}
 
@@ -188,12 +229,6 @@
 	}
 
 	.gifSubmit {
-		position: fixed;
-		bottom: 10px;
-		right: 50%;
-		transform: translateX(50%);
-		z-index: 3;
-		
 		padding: 10px;
 		border-radius: 10px;
 		border: none;
@@ -207,4 +242,19 @@
 			box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.35);
 		}
 	}
+
+	.gifSubmitContainer {
+		position: fixed;
+		bottom: 10px;
+		right: 50%;
+		transform: translateX(50%);
+		z-index: 3;
+
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: 1em;
+	}
+
 </style>

@@ -32,6 +32,7 @@
 	"type": "module",
 	"dependencies": {
 		"@microsoft/signalr": "^7.0.4",
+		"@neoconfetti/svelte": "^1.0.0",
 		"easyqrcodejs": "^4.4.13",
 		"sass": "^1.62.0"
 	}

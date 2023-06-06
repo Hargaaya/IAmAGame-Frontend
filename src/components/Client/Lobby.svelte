@@ -1,12 +1,7 @@
 <script lang="ts">
 	import type { HubConnection } from '@microsoft/signalr';
-	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
-	import { PUBLIC_BACKEND_URL } from '$env/static/public';
-	import type { GameRoom, Player, TenorGif } from '../../types/global';
-	import Autocomplete from "../GifSearchBar/Autocomplete.svelte";
-	import GifList from "../GifSearchBar/GifList.svelte";
-	import SearchBar from "../GifSearchBar/SearchBar.svelte";
+	import type { Player } from '../../types/global';
 
   let roomKey = $page.params.roomKey;
 	export let loading = true;
@@ -31,8 +26,6 @@
 	<div class="container">
 		{#if player}
 			<div class="textContainer">
-				<h1>Game code is: {roomKey}</h1>
-				<br />
 				<h2>Your in, {player.name}!</h2>
 				<h2>See your name on the screen?</h2>
 
@@ -43,7 +36,7 @@
 			</div>
 		{:else}
 			<div class="addContainer">
-				<input type="text" bind:value={playerName} />
+				<input type="text" bind:value={playerName} placeholder="Nickname" />
 				<button on:click={addPlayer} disabled={loading}>Add Me!</button>
 			</div>
 		{/if}
@@ -63,6 +56,7 @@
 			flex-direction: column;
 			align-items: center;
 			justify-content: center;
+			gap: 2em;
 
 			.readyContainer {
 				font-size: x-large;

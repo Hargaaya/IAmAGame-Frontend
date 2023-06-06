@@ -9,7 +9,9 @@
 <div class="giflist">
   {#each gifs as gif}
     <button type="button" on:click={() => {
-      selectedGif ? setSelectedGif(undefined) : setSelectedGif(gif);
+      selectedGif && gif.id === selectedGif.id ? 
+        setSelectedGif(undefined) : 
+        setSelectedGif(gif);
     }} class={"gifSelectBtn " + (selectedGif && selectedGif.id === gif.id ? "selected" : "")}>
       <img src={gif.media_formats.tinygif.url} alt={gif.title} />
     </button>
@@ -36,8 +38,8 @@
       transition: all 0.2s ease-in-out;
 
       img {
-        height: 200px;
-        width: 200px;
+        height: 150px;
+        width: 150px;
         border: none;
         transition: border-radius 0.2s ease-in-out;
       }
